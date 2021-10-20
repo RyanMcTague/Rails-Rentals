@@ -2,7 +2,7 @@
 
 
 
-admin = User.create(email: "admin@email.com", password: "admin", password_confirmation: "admin", is_admin: true)
+admin = User.create(email: ENV["ADMIN_EMAIL"], password: ENV["ADMIN_PASSWORD"], password_confirmation:  ENV["ADMIN_PASSWORD"], is_admin: true)
 user_one = User.create(email: "user_one@email.com", password: "my_password", password_confirmation: "my_password")
 
 movie_conditions =[ 'bad', 'fair', 'new' ]
