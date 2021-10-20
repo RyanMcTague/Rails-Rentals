@@ -11,7 +11,6 @@ movie_conditions =[ 'bad', 'fair', 'new' ]
   movie = Movie.create(
     name: Faker::Movie.title,
     description: Faker::Lorem.paragraph(random_sentences_to_add: 25),
-    rating: rand(0..10)
   )
   10.times do
     Rental.create(
