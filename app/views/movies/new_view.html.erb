@@ -1,0 +1,24 @@
+<h1>New Movie</h1>
+
+<%= form_with url: movies_new_path do |f| %>
+  <div class="row p-3">
+    <div class="col">
+      <%= f.label :name %>
+      <%= f.text_field :name, placeholder: "Movie Name" %>
+    </div>
+
+    <div class="col" hidden>
+      <%= f.label :photo %>
+      <%= f.file_field :photo, accept: "image/*"%>
+    </div>
+  </div>
+
+  <div class="row p-3">
+    <%= f.label :description %>
+    <%= f.text_area :description, placeholder: "Movie Description", rows: 12 %>
+  </div>
+
+  <div class="row p-3">
+    <%= f.submit "Create Movie", class: "btn btn-primary" %>
+  </div>
+<% end %>

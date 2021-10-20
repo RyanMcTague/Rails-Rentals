@@ -1,0 +1,18 @@
+
+<h1 class="border-bottom border-2 border-dark">Transaction for <em ><%= @transaction.rental.movie.name %></em> Rental</h1>
+<br/>
+<br/>
+<div class="container">
+  <div class="row p-3">
+    <div class="col">
+      <b class="me-3">User Email:</b> <%= @transaction.user.email %>
+    </div>
+  </div>
+
+  <div class="row p-3">
+  <div class="col">
+    <%= link_to 'Return to Store', return_rental_path(@transaction.rental), method: :post, class: "btn btn-primary" %>
+  </div>
+    
+  </div>
+</div>

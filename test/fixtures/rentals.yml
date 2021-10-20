@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  condition: MyString
+  movie: one
+  check_out: false
+
+two:
+  condition: MyString
+  movie: two
+  check_out: false

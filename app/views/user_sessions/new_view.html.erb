@@ -1,0 +1,17 @@
+<h1>Login</h1>
+
+<div class="container p-2 border ">
+  <%= form_with url: users_login_path do |f| %>
+    <div class="row p-3">
+      <%= f.label :email %>
+      <%= f.email_field :email, placeholder: "email@example.com" %>
+    </div>
+    <div class="row p-3">
+      <%= f.label :password %>
+      <%= f.password_field :password, placeholder: "password" %>
+    </div>
+    <div class="row p-3">
+      <%= f.submit "Sign in", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

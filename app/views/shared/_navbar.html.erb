@@ -1,0 +1,15 @@
+
+<div class="sidebar bg-dark">
+  <a href="/" class="text-center">
+    <%= image_tag 'RailsRentals-logos_white.png', width: "150", height: "100" %>
+  </a>
+    
+
+    <% if Current.user.present? && Current.user.client? %>
+      <%= render partial: "shared/logged_in_navbar" %>
+    <% elsif Current.user.present? && Current.user.admin?%>
+      <%= render partial: "shared/admin_navbar" %>
+    <% else %>
+      <%= render partial: "shared/no_user_navbar" %>
+    <% end %>
+</div>

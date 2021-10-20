@@ -1,0 +1,43 @@
+<h1>Movies</h1>
+<br/>
+<br/>
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <th scope="col">Name</th>
+      <th scope="col">Rating</th>
+      <th scope="col">Reviews</th>
+      <th scope="col">Total Rentals</th>
+      <th scope="col">DVD Count</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </thead>
+    <tbody>
+      <% @movies.each do |movie| %>
+      
+        <tr>
+          <td><%= movie.name %></td>
+          <td>
+            <% if movie.rental_history != 0 %>
+              <%= movie.rating %> /10 stars
+            <% else %>
+              No Rating
+            <% end %>
+          </td>
+          <td><%= movie.rating_count %></td>
+          <td><%= movie.rental_history %> </td>
+          <td><%= movie.rentals.count %></td>
+          <td>
+            <% if movie.active %>
+              <%= link_to "Remove", remove_movie_path(movie), method: :post, class: "btn btn-danger btn-sm"%>
+            <% else %>
+              <%= link_to "Activate",  activate_movie_path(movie), method: :post,  class: "btn btn-primary btn-sm"%>
+            <% end %>
+          </td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
+</div>

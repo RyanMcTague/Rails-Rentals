@@ -1,0 +1,28 @@
+<h1>New Rental</h1>
+<br/>
+<br/>
+<div class="container">
+
+<%= form_with url: rentals_new_path do |f| %>
+  <div class="row p-3">
+    <div class="col ">
+    <%= f.label "Movie",class: "me-3"%>
+    <%= f.select :movie_name, @movie_names %>
+    </div>
+    <div class="col">
+      <%= f.label :condition ,class: "me-3"%>
+      <%= f.select :condition, ["New", "Fair", "Bad" ] %>
+    </div>
+  </div>
+
+
+  <div class="row p-3">
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity, min: 1, value: 1 %>
+  </div>
+  
+  <div class="row p-3">
+    <%= f.submit "Create Rental(s)", class: "btn btn-primary"%>
+  </div>
+<% end %>
+</div>

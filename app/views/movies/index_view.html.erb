@@ -1,0 +1,29 @@
+
+<% @movies.each do |movie| %>
+  <% if movie.active %>
+
+      <div class="container border m-3 p-4">
+      <div class="inline-box">
+        <div style="display: block;">
+          <img src="<%= Faker::Placeholdit.image(size: '400x400')  %>"  alt="...">
+        </div>
+        <div class="container">
+          <div class="border-bottom border-dark border-2">
+            <h5 class="mx-3"><%= movie.name %> 
+              <span class="mx-2"> | 
+                <% if movie.rental_history != 0 %>
+                  <%= movie.rating %> /10 stars
+                <% else %>
+                  Not Yet Rated
+                <% end %>
+             </span> 
+            </h5>
+          </div>
+          <p class="p-2"><%= movie.description %></p>  
+          <%= link_to 'Rent Movie', movie_show_view_path(movie.id), class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+

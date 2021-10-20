@@ -1,0 +1,85 @@
+<h1><%= Current.user.email %></h1>
+<br/>
+<div class="container mb-4">
+  <h4 class="m-4">Your Active Movies</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Condition Given</th>
+        <th scope="col">Status</th>
+        <th scope="col">Due</th>
+        <th scope="col">Fine</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% Current.rental_transactions.each do |transaction|%>
+        <% rental = transaction.rental %>
+        <% if rental.checked_out? %>
+          <% if transaction.due_today? %>
+            <tr class="table-warning">
+              <td><%= rental.movie.name %></td>
+              <td><%= transaction.given_condition.capitalize %></td>
+              <td>Due today</td>
+              <td><%= transaction.due.utc.strftime('%m/%d/%Y')%></td>
+              <td>-</td>
+            </tr> 
+          <% elsif transaction.overdue? %>
+            <tr class="table-danger">
+              <td><%= rental.movie.name %></td>
+              <td><%= transaction.given_condition.capitalize %></td>
+              <td> Overdue</td>
+              <td><%= transaction.due.utc.strftime('%m/%d/%Y')%></td>
+              <td><%= number_to_currency transaction.fine_total %></td>
+              </tr>
+          <% else %>
+            <tr>
+              <td><%= rental.movie.name %></td>
+              <td><%= transaction.given_condition.capitalize %></td>
+              <td>Okay</td>
+              <td><%= transaction.due.utc.strftime('%m/%d/%Y')%></td>
+              <td>-</td>
+            </tr> 
+          <% end %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<br/>
+<br/>
+<br/>
+
+<div class="container mt-4">
+  <h4 class="m-4">Your Completed Transactions</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Condition Given</th>
+        <th scope="col">Condition Returned</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% Current.rental_transactions.each do |transaction|%>
+        <% rental = transaction.rental %>
+        <% if transaction.completed? %>
+            <tr>
+              <td><%= rental.movie.name %></td>
+              <td><%= transaction.given_condition.capitalize %></td>
+              <td><%= transaction.returned_condition.capitalize %></td>
+              <td>
+                <% if !transaction.rated %>
+                  <%= link_to "Rate Movie", rate_rental_view_path(transaction), class: "btn btn-primary btn-sm"%>
+                <% else %>
+                  Already Rated!
+                <% end %>
+              </td>
+            </tr> 
+        <% end %>
+      <% end %>
+    </tbody>
+    </table>
+
+</div>

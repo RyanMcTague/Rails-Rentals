@@ -1,0 +1,63 @@
+
+
+<div class="container mt-4">
+  <h4 class="m-4">All Rentals</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Movie</th>
+        <th scope="col">Rental ID</th>
+        <th scope="col">Condition</th>
+        <th scope="col">State</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @rentals.each do |rental| %>
+    <% if !rental.removed? %>
+       <% if rental.bad_condition? %>
+        <tr class="table-danger">
+          <td><%= rental.movie.name %></td>
+          <td><%= rental.id %></td>
+          <td><%= rental.condition %></td>
+          <td><%= rental.state %></td>
+          <td>
+            <% if !rental.checked_out? %>
+              <%= link_to 'Remove', remove_rental_path(rental), method: :delete, class: "btn btn-sm btn-danger"  %>
+            <% end %>
+          </td>
+        </tr>
+      <% elsif rental.fair_condition?%>
+        <tr class="table-warning">
+          <td><%= rental.movie.name %></td>
+          <td><%= rental.id %></td>
+          <td><%= rental.condition %></td>
+          <td><%= rental.state %></td>
+          <td>
+            <% if !rental.checked_out? %>
+              <%= link_to 'Remove', remove_rental_path(rental), method: :delete, class: "btn btn-sm btn-danger"  %>
+            <% end %>
+          </td>
+        </tr>
+      <% else %>
+        <tr>
+          <td><%= rental.movie.name %></td>
+          <td><%= rental.id %></td>
+          <td><%= rental.condition %></td>
+          <td><%= rental.state %></td>
+          <td>
+            <% if !rental.checked_out? %>
+              <%= link_to 'Remove', remove_rental_path(rental), method: :delete, class: "btn btn-sm btn-danger"  %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+    <% end %>
+    </tbody>
+  </table>
+
+
+</div>
+
+

@@ -1,0 +1,44 @@
+
+<h1>Rating: <em><%= @rental.movie.name %></em> </h1>
+<br/>
+<br/>
+<div class="container border">
+  <%= form_with url: rate_rental_path(@transaction) do |f| %>
+  <div class="row p-3 bg-secondary border border-dark border-3 m-3">
+    <div class="col">
+      What Would you rate the music and audio? 
+    </div>
+    <div class="col">
+      <%= f.number_field :audio, min: 0, max: 10, value: 5%> / 10
+    </div>
+  </div>
+  <div class="row p-3 bg-secondary border border-dark border-3 m-3">
+    <div class="col">
+      What Would you rate the effects? 
+    </div>
+    <div class="col">
+      <%= f.number_field :effects, min: 0, max: 10, value: 5%> / 10
+    </div>
+  </div>
+  <div class="row p-3 bg-secondary border border-dark border-3 m-3">
+    <div class="col">
+      What Would you rate the plot? 
+    </div>
+    <div class="col">
+      <%= f.number_field :plot, min: 0, max: 10, value: 5%> / 10
+    </div>
+  </div>
+  <div class="row p-3 bg-secondary border border-dark border-3 m-3">
+    <div class="col">
+      What Would you rate the overall experience? 
+    </div>
+    <div class="col">
+      <%= f.number_field :experience, min: 0, max: 10, value: 5%> / 10
+    </div>
+  </div>
+  <div class="row p-3">
+    <%= f.submit "Rate Movie", class: "btn btn-primary"%>
+  </div>
+<% end %>
+
+</div>

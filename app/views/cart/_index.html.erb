@@ -1,0 +1,43 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Condition</th>
+      <th scope="col">Duration</th>
+      <th scope="col">Cost</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% Current.user.rentals.each do |rental|%>
+      <% if !rental.checked_out? %>
+        <tr>
+          <td><%= rental.movie.name %></td>
+          <td><%= rental.condition.capitalize %></td>
+          <td>1 week</td>
+          <td><%= number_to_currency rental.cost %></td>
+          <td><%= link_to 'Remove', remove_from_cart_path(rental.id), method: :delete, class: "btn btn-danger btn-sm" %></td>
+      </tr> 
+    <% end %>
+
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col">Total:</th>
+      <th scope="col"><%= number_to_currency Current.user.cart_total %></th>
+      <th>
+        <script 
+          src="https://checkout.stripe.com/checkout.js" 
+          class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="<%= ENV["RENTAL_DURATION_IN_DAYS"] %>  Day Rental"
+          data-amount="<%= @amount %>"
+          data-locale="auto"
+        ></script> 
+      </th>
+    </tr>
+  </tfoot>
+      </table>

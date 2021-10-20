@@ -1,0 +1,14 @@
+<%= form_tag rental_charges_path do %>
+
+  <% if Current.user.rentals.count == 0 %>
+    <div class="container">
+      <h3 class="text-center mt-4">Your cart is empty!</h3>
+        <th scope="col"> <%= link_to 'View Movies', movies_path, class: "btn btn-primary btn-sm"  %> </th>
+    </div>
+
+  <% else %>
+    <div class="container m-4">
+      <%= render partial: "cart/index" %>
+    </div>
+  <% end %>
+<% end %>

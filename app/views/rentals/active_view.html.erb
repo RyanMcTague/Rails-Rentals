@@ -1,0 +1,67 @@
+
+<div class="container mt-4">
+  <h4 class="m-4">Current Rented Movies</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">User</th>
+        <th scope="col">Name</th>
+        <th scope="col">Rental ID</th>
+        <th scope="col">Status</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @transactions.each do |transaction| %>
+      <% rental = transaction.rental %>
+      <% if rental.checked_out? %>
+        <% if transaction.due_today? %>
+          <tr class="table-warning">
+            <td><%= rental.user.email  %></td>
+            <td><%= rental.movie.name %></td>
+            <td><%= rental.id %></td>
+            <td>
+              <% if transaction.overdue? %>
+                Overdue
+              <% else %>
+                -
+              <% end %>
+            </td>
+            <td><%= link_to "View", transaction_view_path(transaction), class: "btn btn-primary btn-sm"%></td>
+          </tr> 
+        <% elsif transaction.overdue? %>
+          <tr class="table-danger">
+            <td><%= rental.user.email  %></td>
+            <td><%= rental.movie.name %></td>
+            <td><%= rental.id %></td>
+            <td>
+              <% if transaction.overdue? %>
+                Overdue
+              <% else %>
+                -
+              <% end %>
+            </td>
+            <td><%= link_to "View", transaction_view_path(transaction), class: "btn btn-primary btn-sm"%></td>
+          </tr>
+        <% else %>
+          <tr>
+            <td><%= rental.user.email %></td>
+            <td><%= rental.movie.name %></td>
+            <td><%= rental.id %></td>
+            <td>
+              <% if transaction.overdue? %>
+                Overdue
+              <% else %>
+                -
+              <% end %>
+            </td>
+            <td><%= link_to 'View', transaction_view_path(transaction.id), class: "btn btn-primary btn-sm" %></td>
+          </tr> 
+        <% end %>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+
+
+</div>
