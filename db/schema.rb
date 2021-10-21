@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2021_10_20_135519) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -35,13 +38,13 @@ ActiveRecord::Schema.define(version: 2021_10_20_135519) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "fines", force: :cascade do |t|
-    t.integer "rental_transaction_id", null: false
+    t.bigint "rental_transaction_id", null: false
     t.decimal "amount", default: "0.0"
     t.boolean "paid", default: false
     t.datetime "date"
@@ -59,8 +62,8 @@ ActiveRecord::Schema.define(version: 2021_10_20_135519) do
   end
 
   create_table "ratings", force: :cascade do |t|
-    t.integer "rental_id", null: false
-    t.integer "movie_id", null: false
+    t.bigint "rental_id", null: false
+    t.bigint "movie_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "audio_rating", default: 5
@@ -73,8 +76,8 @@ ActiveRecord::Schema.define(version: 2021_10_20_135519) do
 
   create_table "rental_transactions", force: :cascade do |t|
     t.decimal "price", default: "0.0"
-    t.integer "rental_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "rental_id", null: false
+    t.bigint "user_id", null: false
     t.string "given_condition", default: "0"
     t.string "returned_condition", default: "0"
     t.integer "state", default: 0
@@ -88,11 +91,11 @@ ActiveRecord::Schema.define(version: 2021_10_20_135519) do
 
   create_table "rentals", force: :cascade do |t|
     t.string "condition", default: "new"
-    t.integer "movie_id", null: false
+    t.bigint "movie_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "state", default: 0
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["movie_id"], name: "index_rentals_on_movie_id"
     t.index ["user_id"], name: "index_rentals_on_user_id"
   end

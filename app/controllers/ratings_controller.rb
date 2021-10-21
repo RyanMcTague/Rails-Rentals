@@ -14,7 +14,7 @@ class RatingsController < ApplicationController
       plot: params[:plot].to_i,
       experince: params[:experince].to_i,
     )
-    flash[:notice] = "Rated #{@rental.movie.name} a #{@rating.value} / 10"
+    flash[:notice] = "Rated #{@transaction.rental.movie.name} a #{@rating.value} / 10"
     redirect_to users_path
   end
 end
